@@ -7,13 +7,22 @@ class DatabaseConnection:
 	def __init__(self):
 		self.client = MongoClient(config.MONGO_URI)
 		self.client.admin.command("ping")
-   
-   
+	
+	
 	def get_collection(self, collection):
 		"""Retrieve a specific collection from the remote database."""
 		return self.client[config.DB_NAME][collection]
-   
-   
+	
+	
+	def wipe_data(self, session):
+		"""Attempt to completely remove the given session from the database"""
+		if not session:
+			return "Invalid session"
+
+		self.get_collection(config.SESSION_COLLECTION).delete_one({"session": session.session_name})
+		return "Session wiped successfully"
+	
+	
 	def push_data(self, session):
 		"""Attempt to replace the remote data for the current session with the local data of the current session. If the session does not exist, a new one will be created."""
 		if not session:

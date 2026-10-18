@@ -1,3 +1,11 @@
+> Commit: Leaving sessions
+>
+> - Added leave session function to session manager'
+> - Adjusted headless comment naming for clarity
+> - Added headless tests for successfully and unsuccessfully leaving sessions
+> - Changed headless result checking to allow for arrays in different orders
+> - Database connection can now remove sessions
+
 > Commit: Headless testing simplification and summary
 >
 > - Created a Test class which returns a result string and pass/fail bool when created
