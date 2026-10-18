@@ -1,3 +1,8 @@
+> Commit: Better headless reporting
+>
+> - Verbose headless testing now returns the expected and actual result
+> - Headless testing now returns a simple pass/fail message for each test to make the output cleaner
+
 > Commit: Added verbose headless testing mode
 >
 > - Removed data display import from headless.py

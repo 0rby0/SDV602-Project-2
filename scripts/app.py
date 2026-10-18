@@ -23,4 +23,4 @@ class App:
 			HeadlessTest(self, True)
 
 if __name__ == "__main__": 
-	App(REMOTE=True, HEADLESS=True)
+	App(REMOTE=False, HEADLESS=True)
