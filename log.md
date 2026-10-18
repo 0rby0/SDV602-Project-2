@@ -1,3 +1,10 @@
+> Commit: Headless testing simplification and summary
+>
+> - Created a Test class which returns a result string and pass/fail bool when created
+> - Updated headless testing to use Test classes instead of existing process
+> - Added a final print to the headless testing which states how many tests passed and how many failed
+> - Changed verbose argument to verbosity now using a number between 0 and 3 instead of a boolean
+
 > Commit: Better headless reporting
 >
 > - Verbose headless testing now returns the expected and actual result

@@ -62,7 +62,7 @@ class Session:
 
 	def rename_dataset(self, old_name, new_name):
 		"""Attempts to change all instances of the old name to the new name."""
-		print(self._files.rename_dataset(old_name, new_name))
+		self._files.rename_dataset(old_name, new_name)
   
 		if self.db:
 			self.db.push_data(self)

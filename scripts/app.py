@@ -15,12 +15,12 @@ class App:
 			self.sm = SessionManager()
 			self.user = User()
 		else:
-			self.session = Session("Local Session", remote=False)
+			self.session = Session("Local Session", remote = False)
 	
 		self.data_display = DataDisplay()
 	
 		if HEADLESS:
-			HeadlessTest(self, True)
+			HeadlessTest(self, verbosity = 3)
 
 if __name__ == "__main__": 
-	App(REMOTE=False, HEADLESS=True)
+	App(REMOTE = True, HEADLESS = True)
