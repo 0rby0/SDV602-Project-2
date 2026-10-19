@@ -9,7 +9,7 @@ class Test:
 	def __init__(self, test_name, function_description, test_function, expected_result, print_verbose):
 		output = {"text": "", "passed": False}
 
-		output["text"] += f"\n\n{test_name} - "
+		output["text"] += f"\n\n\033[1m{test_name}\033[0m - "
 
 		result = test_function
 
@@ -29,10 +29,10 @@ class Test:
 						valid_result = False
 
 		if valid_result:
-				output["text"] += f"\nPassed"
+				output["text"] += f"\n\033[92mPassed\033[0m"
 				output["passed"] = True
 		else:
-				output["text"] += f"\nFailed"
+				output["text"] += f"\n\033[91mFailed\033[0m"
 				output["passed"] = False
 
 		self.output = output

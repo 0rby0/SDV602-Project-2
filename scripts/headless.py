@@ -365,7 +365,29 @@ class HeadlessTest:
 			# User Tests
 			if app.user is not None:
       
-				# Test 2.7 Start ------------------------------------------------------------------------------------
+				# Test 2.7 Start  ------------------------------------------------------------------------------------
+    
+				results.append(Test ( test_name = "Delete new user",
+                   										function_description = "User.delete_user",
+																test_function = app.sm.user.delete_user(),
+                											expected_result = "User deleted successfully",
+                           							print_verbose = (verbosity >= 3)))
+    
+				# Test 2.7 End  ------------------------------------------------------------------------------------
+      
+      
+				# Test 2.8 Start  ------------------------------------------------------------------------------------
+		
+				results.append(Test ( test_name = "Fail to delete a non-existant user",
+																function_description = "User.delete_user",
+																test_function = app.sm.user.delete_user(),
+																expected_result = "Failed to delete user",
+																print_verbose = (verbosity >= 3)))
+		
+				# Test 2.8 End  ------------------------------------------------------------------------------------
+      
+      
+				# Test 2.9 Start ------------------------------------------------------------------------------------
 				
 				results.append(Test ( test_name = "Log in as original user",
 																	function_description = "User.log_in_user",
@@ -373,7 +395,7 @@ class HeadlessTest:
 																	expected_result = "Login Success",
 																	print_verbose = (verbosity >= 3)))
 			
-				# Test 2.7 Start ------------------------------------------------------------------------------------
+				# Test 2.9 Start ------------------------------------------------------------------------------------
     
     
 			# Test 1.22 Start ------------------------------------------------------------------------------------
@@ -396,8 +418,53 @@ class HeadlessTest:
 															print_verbose = (verbosity >= 3)))
 	
 			# Test 1.23 Start ------------------------------------------------------------------------------------
-		
+		  
+			# User Tests
+			if app.user is not None:
+      
+				# Test 2.10 Start  ------------------------------------------------------------------------------------
+    
+				results.append(Test ( test_name = "Log out of test account",
+                   										function_description = "User.log_out",
+																test_function = app.sm.user.log_out(),
+                											expected_result = "Logged out",
+                           							print_verbose = (verbosity >= 3)))
+    
+				# Test 2.10 End  ------------------------------------------------------------------------------------
+    
+    
+				# Test 2.11 Start  ------------------------------------------------------------------------------------
+    
+				results.append(Test ( test_name = "Log out of no account",
+                   										function_description = "User.log_out",
+																test_function = app.sm.user.log_out(),
+                											expected_result = "Logged out",
+                           							print_verbose = (verbosity >= 3)))
+    
+				# Test 2.11 End  ------------------------------------------------------------------------------------
 
+
+				# Test 2.12 Start ------------------------------------------------------------------------------------
+				
+				results.append(Test ( test_name = "Log in as original user again",
+																	function_description = "User.log_in_user",
+																	test_function = app.user.log_in_user("Test User", "Password123"),
+																	expected_result = "Login Success",
+																	print_verbose = (verbosity >= 3)))
+			
+				# Test 2.12 Start ------------------------------------------------------------------------------------
+	 
+  
+				# Test 2.13 Start  ------------------------------------------------------------------------------------
+	 
+				results.append(Test ( test_name = "Delete test account",
+																function_description = "User.delete_user",
+																test_function = app.sm.user.delete_user(),
+																expected_result = "User delete successfully",
+																print_verbose = (verbosity >= 3)))
+	 
+				# Test 2.13 End  ------------------------------------------------------------------------------------
+    
 		# Session Tests
 		if app.session is not None:
 
@@ -613,7 +680,7 @@ class HeadlessTest:
 				else:
 					failed_tests += 1
 
-			summary = f"\nHeadless Test Summary :---:\n\n\tPassed: {passed_tests}\n\tFailed: {failed_tests}\n"
+			summary = f"\nHeadless Test Summary :---:\n\n\t\033[92mPassed\033[0m: {passed_tests}\n\t\033[91mFailed\033[0m: {failed_tests}\n"
 
 			print(summary)
 
@@ -621,7 +688,7 @@ class HeadlessTest:
 		else:
 			for result in results:
 				if result.output["passed"] == False:
-					print(f"\nHeadless Test Failed\n")
+					print(f"\nHeadless Test \033[91mFailed\033[0m\n")
 					return
 			
-			print(f"\nHeadless Test Passed\n")
+			print(f"\nHeadless Test \033[92mPassed\033[0m\n")

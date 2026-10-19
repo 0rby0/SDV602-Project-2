@@ -23,3 +23,12 @@ class UserManager:
 		userdata = {"username": username, "hash": hash}
 		self.get_collection(config.USER_COLLECTION).insert_one(userdata)
 		return "User created successfully"
+
+
+	def wipe_user(self, username):
+		"""Wipes the user's data from the database"""
+		if not self.find_user(username):
+			return "User not in database"
+
+		self.get_collection(config.USER_COLLECTION).delete_one({"username": username})
+		return "User removed from database"

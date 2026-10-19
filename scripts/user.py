@@ -41,3 +41,18 @@ class User:
 			return "Login Success"
 		else:
 			return "Login Failed"
+
+
+	def log_out(self):
+		"""Unsets the current user if possible"""
+		self.username = None
+		return "Logged out"
+  
+  
+	def delete_user(self):
+		"""Removes the user from the database and signs them out"""
+		if self.db.wipe_user(self.username) == "User removed from database":
+			self.username = None
+			return "User deleted successfully"
+		else:
+			return "Failed to delete user"

@@ -1,3 +1,10 @@
+> Commit: Logging out and removing users from database
+>
+> - Added function to user class to log out user
+> - Added function to delete a user from the database by name in the user class and user manager class
+> - Added headless tests for log out and user removal, log out should currently always succeed since it will always set the username to none no matter what
+> - Added some formatting to the headless output in the form of coloured text and bold test headings
+
 > Commit: Ending sessions / Storing session user data
 >
 > - Added function to session manager which removes session from database
