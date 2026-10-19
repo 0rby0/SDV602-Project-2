@@ -1,3 +1,13 @@
+> Commit: Ending sessions / Storing session user data
+>
+> - Added function to session manager which removes session from database
+> - Added headless tests for successful and failed session removal
+> - Sessions now track their creator and current users
+> - Session managers are sessions now take a user when initialising
+> - Replaced the remote flag when initialising sessions with a check for if a user is set
+> - Session removal also takes a user which must match the creator of the session
+> - Added headless tests for user creation and log in
+
 > Commit: Leaving sessions
 >
 > - Added leave session function to session manager'

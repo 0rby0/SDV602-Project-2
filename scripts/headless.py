@@ -1,5 +1,6 @@
 # Run through a series of commands to test the application
 from test import Test
+from session import Session
 
 # Verbosity Levels:
 #
@@ -20,7 +21,32 @@ class HeadlessTest:
 
 		# Session Manager Tests
 		if app.sm is not None:
+     
+			# User Tests
+			if app.user is not None:
 
+				# Test 2.1 Start ------------------------------------------------------------------------------------
+
+				results.append(Test ( test_name = "Create a new test user account",
+																function_description = "User.register_user",
+																test_function = app.user.register_user("Test User", "Password123"),
+																expected_result = "User created successfully",
+																print_verbose = (verbosity >= 3)))
+
+				# Test 2.1 End ------------------------------------------------------------------------------------
+    
+    
+				# Test 2.2 Start ------------------------------------------------------------------------------------
+
+				results.append(Test ( test_name = "Log in as new test user",
+																function_description = "User.log_in_user",
+																test_function = app.user.log_in_user("Test User", "Password123"),
+																expected_result = "Login Success",
+																print_verbose = (verbosity >= 3)))
+
+				# Test 2.2 End ------------------------------------------------------------------------------------
+    
+    
 			# Test 1.1 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "Joining a test session",
@@ -234,14 +260,39 @@ class HeadlessTest:
 			# Test 1.17 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Completely remove the test dataset",
-													function_description = "Session.remove_dataset",
-											test_function = app.sm.sessions[0].remove_dataset("New Name"),
-											expected_result = "Dataset 'New Name' successfully removed",
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.remove_dataset",
+															test_function = app.sm.sessions[0].remove_dataset("New Name"),
+															expected_result = "Dataset 'New Name' successfully removed",
+															print_verbose = (verbosity >= 3)))
 
 			# Test 1.17 End ------------------------------------------------------------------------------------
 
 
+			# User Tests
+			if app.user is not None:
+      
+				# Test 2.3 Start ------------------------------------------------------------------------------------
+
+				results.append(Test ( test_name = "Send a message to the database",
+																function_description = "Session.send_message",
+																test_function = app.sm.sessions[0].send_message(app.user, "Hello World"),
+																expected_result = "Message sent",
+																print_verbose = (verbosity >= 3)))
+
+				# Test 2.3 End ------------------------------------------------------------------------------------
+
+
+				# Test 2.4 Start ------------------------------------------------------------------------------------
+
+				results.append(Test ( test_name = "Return the session's chat log",
+																function_description = "Session.get_messages",
+																test_function = app.sm.sessions[0].get_messages(),
+																expected_result = "Test User: Hello World",
+																print_verbose = (verbosity >= 3)))
+
+				# Test 2.4 End ------------------------------------------------------------------------------------
+    
+    
 			# Test 1.18 Start ------------------------------------------------------------------------------------
 	
 			results.append(Test ( test_name = "Leave the first test session",
@@ -263,29 +314,89 @@ class HeadlessTest:
 	
 			# Test 1.19 Start ------------------------------------------------------------------------------------
    
+   
+			# Test 1.20 Start ------------------------------------------------------------------------------------
+	
+			results.append(Test ( test_name = "Rejoin the first test session",
+															function_description = "SessionManager.join_or_create_session",
+            											test_function = app.sm.join_or_create_session("Test Session 1"),
+															expected_result = "Successfully joined session: 'Test Session 1'",
+                                             print_verbose = (verbosity >= 3)))
+	
+			# Test 1.20 Start ------------------------------------------------------------------------------------
+   
+   		
 			# User Tests
 			if app.user is not None:
-
-				# Test 2.1 Start ------------------------------------------------------------------------------------
-
-				results.append(Test ( test_name = "Send a message to the database",
-												function_description = "Session.send_message",
-												test_function = app.sm.sessions[0].send_message(app.user, "Hello World"),
-												expected_result = "Message sent",
-												print_verbose = (verbosity >= 3)))
-
-				# Test 2.1 End ------------------------------------------------------------------------------------
-
-
-				# Test 2.2 Start ------------------------------------------------------------------------------------
-
-				results.append(Test ( test_name = "Return the session's chat log",
-												function_description = "Session.get_messages",
-												test_function = app.sm.sessions[0].get_messages(),
-												expected_result = "None: Hello World",
-												print_verbose = (verbosity >= 3)))
-
-				# Test 2.2 End ------------------------------------------------------------------------------------
+      
+				# Test 2.5 Start ------------------------------------------------------------------------------------
+				
+				results.append(Test ( test_name = "Create a new account",
+																	function_description = "User.register_user",
+																	test_function = app.user.register_user("Other User", "123Wordpass"),
+																	expected_result = "User created succesfully",
+																	print_verbose = (verbosity >= 3)))
+			
+				# Test 2.5 Start ------------------------------------------------------------------------------------
+		
+		
+				# Test 2.6 Start ------------------------------------------------------------------------------------
+				
+				results.append(Test ( test_name = "Log in to new account",
+																	function_description = "User.log_in_user",
+																	test_function = app.user.log_in_user("Other User", "123Wordpass"),
+																	expected_result = "Login Success",
+																	print_verbose = (verbosity >= 3)))
+			
+				# Test 2.6 Start ------------------------------------------------------------------------------------
+   
+   
+			# Test 1.21 Start ------------------------------------------------------------------------------------
+			
+			results.append(Test ( test_name = "Fail to delete the first test session with a non-creator account",
+																function_description = "SessionManager.remove_session",
+																test_function = app.sm.remove_session(app.sm.sessions[1], app.user),
+																expected_result = "User is not creator of session",
+																print_verbose = (verbosity >= 3)))
+		
+			# Test 1.21 Start ------------------------------------------------------------------------------------
+		
+  
+			# User Tests
+			if app.user is not None:
+      
+				# Test 2.7 Start ------------------------------------------------------------------------------------
+				
+				results.append(Test ( test_name = "Log in as original user",
+																	function_description = "User.log_in_user",
+																	test_function = app.user.log_in_user("Test User", "Password123"),
+																	expected_result = "Login Success",
+																	print_verbose = (verbosity >= 3)))
+			
+				# Test 2.7 Start ------------------------------------------------------------------------------------
+    
+    
+			# Test 1.22 Start ------------------------------------------------------------------------------------
+		
+			results.append(Test ( test_name = "Delete the first test session",
+															function_description = "SessionManager.remove_session",
+															test_function = app.sm.remove_session(app.sm.sessions[1], app.user),
+															expected_result = "Session 'Test Session 1' removed from database",
+															print_verbose = (verbosity >= 3)))
+	
+			# Test 1.22 Start ------------------------------------------------------------------------------------
+   
+   
+			# Test 1.23 Start ------------------------------------------------------------------------------------
+	
+			results.append(Test ( test_name = "Fail to remove a non-existant session from the database",
+															function_description = "SessionManager.remove_session",
+															test_function = app.sm.remove_session(Session("Not a real session"), app.user),
+															expected_result = "Session not in database",
+															print_verbose = (verbosity >= 3)))
+	
+			# Test 1.23 Start ------------------------------------------------------------------------------------
+		
 
 		# Session Tests
 		if app.session is not None:

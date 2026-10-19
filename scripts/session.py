@@ -4,16 +4,17 @@ from database_connect import DatabaseConnection
 from chat import Chat
 
 class Session:
-	def __init__(self, name, remote = False):
+	def __init__(self, name, user = None):
 		self.session_name = name
+		self.creator = user
+		self.users = []
 		self._files = FileManager()
 		
 		self.db = None
 		self._chat = None
   
-		if remote == True:
+		if user is not None:
 			self._chat = Chat()
-     
 			self.db = DatabaseConnection()
 			self.db.pull_data(self)
 			self.db.push_data(self)

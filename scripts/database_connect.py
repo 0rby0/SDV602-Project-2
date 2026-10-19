@@ -32,9 +32,12 @@ class DatabaseConnection:
   
 		for message in session._chat.messages:
 			messages.append({"sender": message.sender, "contents": message.contents})
+		
+		if not session.creator:
+			return "Cannot push, no session creator"
   
-		formatted_data = { "session": session.session_name, "datasets": session._files.internal_db, "chat":  messages}
-  
+		formatted_data = { "session": session.session_name, "creator": session.creator, "datasets": session._files.internal_db, "chat":  messages}
+
 		return self.get_collection(config.SESSION_COLLECTION).find_one_and_replace({"session": session.session_name}, formatted_data, upsert=True)
 
 
@@ -62,6 +65,7 @@ class DatabaseConnection:
 		session._files.datasets = pulled_datasets
 		session._files.internal_db = pulled_data['datasets']
 		session._chat.messages = pulled_messages
+		session.creator = pulled_data["creator"]
 
 		return "Session pulled successfully"
 

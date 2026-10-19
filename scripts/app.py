@@ -12,10 +12,10 @@ class App:
 		self.session = None
 		
 		if REMOTE:
-			self.sm = SessionManager()
 			self.user = User()
+			self.sm = SessionManager(self.user)
 		else:
-			self.session = Session("Local Session", remote = False)
+			self.session = Session("Local Session", user = None)
 	
 		self.data_display = DataDisplay()
 	

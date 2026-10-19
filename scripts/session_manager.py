@@ -3,8 +3,9 @@ from database_connect import DatabaseConnection
 from session import Session
 
 class SessionManager:
-	def __init__(self):
+	def __init__(self, user):
 		self.sessions = []
+		self.user = user
 		self.db = DatabaseConnection()
 
 
@@ -24,9 +25,27 @@ class SessionManager:
 
 	def join_or_create_session(self, session_name):
 		"""Creates a new session in the sessions list, if the session exists in the database it will find itself."""
-		self.sessions.append(Session(session_name, True))
+		self.sessions.append(Session(session_name, self.user.username))
 		return f"Successfully joined session: '{session_name}'"
 
+
+	def remove_session(self, session, user):
+		"""Attempt to remove the requested session from the database as the given user"""
+		if not session:
+			return "Invalid session"
+
+		if not user:
+			return "Invalid user"
+
+		if session.session_name not in self.get_remote_sessions():
+			return "Session not in database"
+
+		if session.creator != user.username:
+			return "User is not creator of session"
+
+		self.db.wipe_data(session)
+		return f"Session '{session.session_name}' removed from database"
+ 
 
 	def leave_session(self, session_name):
 		"""Attempt to remove the session with the requested name from the session manager session list"""
