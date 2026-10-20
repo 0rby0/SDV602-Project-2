@@ -1,3 +1,8 @@
+> Commit: Command line arguments
+>
+> - app.py now parser arguments for remote mode and headless testing mode / test result verbosity
+> - Replaced the app classes instantiating headless flag with a verbosity level which automatically triggers the headless test if it is 0 or more
+
 > Commit: Logging out and removing users from database
 >
 > - Added function to user class to log out user

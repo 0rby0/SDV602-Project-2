@@ -4,9 +4,10 @@ from session_manager import SessionManager
 from data__displayer import DataDisplay
 from user import User
 from headless import HeadlessTest
+import argparse
 
 class App:
-	def __init__(self, REMOTE : bool, HEADLESS : bool):
+	def __init__(self, REMOTE : bool, verbosity : int):
 		self.sm = None
 		self.user = None
 		self.session = None
@@ -19,8 +20,15 @@ class App:
 	
 		self.data_display = DataDisplay()
 	
-		if HEADLESS:
-			HeadlessTest(self, verbosity = 3)
+		if verbosity >= 0:
+			HeadlessTest(self, verbosity = verbosity)
 
-if __name__ == "__main__": 
-	App(REMOTE = True, HEADLESS = True)
+if __name__ == "__main__":
+	parser = argparse.ArgumentParser()
+
+	parser.add_argument("-r", "--Remote", help="execute the app in remote mode, leave off for local mode", action="store_true")
+	parser.add_argument("-t", "--Test", choices=[0, 1, 2, 3], default=-1, type=int, help="run the app in headless testing mode at the given verbosity level")
+ 
+	args = parser.parse_args()
+ 
+	App(REMOTE = args.Remote, verbosity = args.Test)
