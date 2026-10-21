@@ -4,10 +4,13 @@ from database_connect import DatabaseConnection
 from chat import Chat
 
 class Session:
-	def __init__(self, name, user = None):
+	def __init__(self, name, user = None, public = True):
 		self.session_name = name
 		self.creator = user
+		self.public = public
+  
 		self.users = []
+  
 		self._files = FileManager()
 		
 		self.db = None

@@ -15,13 +15,14 @@ class Test:
 
 		if print_verbose:
 				output["text"] += f"\n\tFunction: {function_description}"
-				output["text"] += f"\n\tExpected Result: {expected_result}"
-				output["text"] += f"\n\tActual Result: {result}"
+				output["text"] += f"\n\tExpected Result: |{expected_result}|"
+				output["text"] += f"\n\tActual Result: |{result}|"
 
 		valid_result = True
-		# If the result or expected output is None, check for a direct match
-		if result == None or expected_result == None:
+		# If the result or expected output is None, or the result if a string, check for a direct match
+		if result == None or expected_result == None or type(result) == str:
 			valid_result = (result == expected_result)
+     
 		else:
 			# Check that the result of the function contains all of the expected items
 			for entry in result:

@@ -18,33 +18,53 @@ class SessionManager:
 			return "No sessions"
   
 		for session in retrieved_sessions:
-			session_list.append(session["session"])
+			if session["public"] == True:
+				session_list.append(session["session"])
 
 		return session_list
 
 
-	def join_or_create_session(self, session_name):
+	def search_sessions(self, search_string):
+		"""Return an array with the names of any remote sessions containing the search string"""
+		matching_sessions = []
+  
+		for session in self.get_remote_sessions():
+			if search_string in session:
+				matching_sessions.append(session)
+
+		if len(matching_sessions) == 0:
+			return "No sessions found"
+
+		return matching_sessions
+
+
+	def join_or_create_session(self, session_name, public = True):
 		"""Creates a new session in the sessions list, if the session exists in the database it will find itself."""
-		self.sessions.append(Session(session_name, self.user.username))
+		self.sessions.append(Session(session_name, self.user.username, public = public))
 		return f"Successfully joined session: '{session_name}'"
 
 
-	def remove_session(self, session, user):
+	def remove_session(self, session_name, user):
 		"""Attempt to remove the requested session from the database as the given user"""
-		if not session:
+		if not session_name:
 			return "Invalid session"
 
 		if not user:
 			return "Invalid user"
 
-		if session.session_name not in self.get_remote_sessions():
-			return "Session not in database"
+		for session in self.sessions:
+			if session.session_name == session_name:
+      
+				if session.session_name not in self.get_remote_sessions():
+					return "Session not in database"
 
-		if session.creator != user.username:
-			return "User is not creator of session"
+				if session.creator != user.username:
+					return "User is not creator of session"
 
-		self.db.wipe_data(session)
-		return f"Session '{session.session_name}' removed from database"
+				self.db.wipe_data(session)
+				return f"Session '{session.session_name}' removed from database"
+ 
+		return "Session not open"
  
 
 	def leave_session(self, session_name):

@@ -69,9 +69,20 @@ class HeadlessTest:
 			# Test 1.2 End ------------------------------------------------------------------------------------
 	
 
+			# Test 1.2.1 Start ------------------------------------------------------------------------------------
+
+			results.append(Test( test_name = "Joining a private session",
+									  			function_description = "SessionManager.join_or_create_session",
+											test_function = app.sm.join_or_create_session("Private session", public = False),
+											expected_result = "Successfully joined session: 'Private session'",
+											print_verbose = (verbosity >= 3)))
+
+			# Test 1.2.1 End ------------------------------------------------------------------------------------
+   
+   
 			# Test 1.3 Start ------------------------------------------------------------------------------------
 
-			results.append(Test( test_name = "List both active sessions",
+			results.append(Test( test_name = "List both active public sessions",
 									  			function_description = "SessionManager.get_remote_sessions",
 											test_function = app.sm.get_remote_sessions(),
 											expected_result = ['Test Session 1', 'Test Session 2'],
@@ -79,7 +90,40 @@ class HeadlessTest:
 
 			# Test 1.3 End ------------------------------------------------------------------------------------
 	
+ 
+ 			# Test 1.3.1 Start ------------------------------------------------------------------------------------
 
+			results.append(Test( test_name = "Return the first remote session",
+									  			function_description = "SessionManager.search_sessions",
+											test_function = app.sm.search_sessions("1"),
+											expected_result = ['Test Session 1'],
+											print_verbose = (verbosity >= 3)))
+
+			# Test 1.3.1 End ------------------------------------------------------------------------------------
+
+
+			# Test 1.3.2 Start ------------------------------------------------------------------------------------
+
+			results.append(Test( test_name = "Fail to return a result for an invalid search",
+												function_description = "SessionManager.search_sessions",
+											test_function = app.sm.search_sessions("&"),
+											expected_result = "No sessions found",
+											print_verbose = (verbosity >= 3)))
+
+			# Test 1.3.2 End ------------------------------------------------------------------------------------
+
+
+   		# Test 1.2.2 Start ------------------------------------------------------------------------------------
+
+			results.append(Test( test_name = "Delete private session",
+									  			function_description = "SessionManager.remove_session",
+											test_function = app.sm.remove_session("Private Session", app.user),
+											expected_result = "Session 'Private Session' removed from database",
+											print_verbose = (verbosity >= 3)))
+
+			# Test 1.2.2 End ------------------------------------------------------------------------------------
+   
+   
 			# Test 1.4 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "Create a new dataset",
@@ -334,7 +378,7 @@ class HeadlessTest:
 				results.append(Test ( test_name = "Create a new account",
 																	function_description = "User.register_user",
 																	test_function = app.user.register_user("Other User", "123Wordpass"),
-																	expected_result = "User created succesfully",
+																	expected_result = "User created successfully",
 																	print_verbose = (verbosity >= 3)))
 			
 				# Test 2.5 Start ------------------------------------------------------------------------------------
@@ -355,7 +399,7 @@ class HeadlessTest:
 			
 			results.append(Test ( test_name = "Fail to delete the first test session with a non-creator account",
 																function_description = "SessionManager.remove_session",
-																test_function = app.sm.remove_session(app.sm.sessions[1], app.user),
+																test_function = app.sm.remove_session("Test Session 1", app.user),
 																expected_result = "User is not creator of session",
 																print_verbose = (verbosity >= 3)))
 		
@@ -402,7 +446,7 @@ class HeadlessTest:
 		
 			results.append(Test ( test_name = "Delete the first test session",
 															function_description = "SessionManager.remove_session",
-															test_function = app.sm.remove_session(app.sm.sessions[1], app.user),
+															test_function = app.sm.remove_session("Test Session 1", app.user),
 															expected_result = "Session 'Test Session 1' removed from database",
 															print_verbose = (verbosity >= 3)))
 	
@@ -460,7 +504,7 @@ class HeadlessTest:
 				results.append(Test ( test_name = "Delete test account",
 																function_description = "User.delete_user",
 																test_function = app.sm.user.delete_user(),
-																expected_result = "User delete successfully",
+																expected_result = "User deleted successfully",
 																print_verbose = (verbosity >= 3)))
 	 
 				# Test 2.13 End  ------------------------------------------------------------------------------------

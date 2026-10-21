@@ -1,3 +1,21 @@
+> Checklist of things I know are left before front-end implementation:
+>
+> - Tracking active users for each session in the database
+> - Disallowing session deletion if there are still users in the session
+> - Return graph configuration options
+> - Seperate session creation and joining
+
+> Commit: Session searching and publicity
+>
+> - Added a function to the session manager which takes a search term and returns a list of results containing the search term
+> - Added headless tests for searching sessions
+> - Added public value to session class
+> - Database manager now pushes and pulls publicity to/from the database
+> - Session manager now only returns public sessions when getting all sessions
+> - Added headless tests for session publicity
+> - Fixed issue with headless tests not comparing their expected and outputted result correctly
+> - Changed remove session function to take a session name instead of the whole session
+
 > Commit: Command line arguments
 >
 > - app.py now parser arguments for remote mode and headless testing mode / test result verbosity
