@@ -13,7 +13,12 @@ class DatabaseConnection:
 		"""Retrieve a specific collection from the remote database."""
 		return self.client[config.DB_NAME][collection]
 	
-	
+
+	def get_all_sessions(self):
+		"""Retrieves all session documents from the remote database."""
+		return self.get_collection(config.SESSION_COLLECTION).find()
+
+
 	def wipe_data(self, session):
 		"""Attempt to completely remove the given session from the database"""
 		if not session:
@@ -69,8 +74,3 @@ class DatabaseConnection:
 		session.public = pulled_data["public"]
 
 		return "Session pulled successfully"
-
-
-	def get_all_sessions(self):
-		"""Retrieves all session documents from the remote database."""
-		return self.get_collection(config.SESSION_COLLECTION).find()

@@ -16,7 +16,7 @@ class App:
 			self.user = User()
 			self.sm = SessionManager(self.user)
 		else:
-			self.session = Session("Local Session", user = None)
+			self.session = Session("Local Session", self.user)
 	
 		self.data_display = DataDisplay()
 	

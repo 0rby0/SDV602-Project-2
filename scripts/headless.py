@@ -277,7 +277,7 @@ class HeadlessTest:
 			results.append(Test ( test_name = "Fail to compile the old dataset name",
 													function_description = "Session.compile_dataset",
 											test_function = app.sm.sessions[0].compile_dataset("Test Dataset"),
-											expected_result = "Invalid tag: 'Test Dataset'",
+											expected_result = "Invalid dataset: 'Test Dataset'",
 											print_verbose = (verbosity >= 3)))
 
 			# Test 1.15 End ------------------------------------------------------------------------------------
@@ -515,10 +515,10 @@ class HeadlessTest:
 			# Test 3.1 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Create a new dataset",
-													function_description = "Session.new_dataset",
-											test_function = app.session.new_dataset("Test Dataset"),
-											expected_result = "Dataset 'Test Dataset' successfully created",
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.new_dataset",
+															test_function = app.session.new_dataset("Test Dataset"),
+															expected_result = "Dataset 'Test Dataset' successfully created",
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.1 End ------------------------------------------------------------------------------------
 
@@ -526,10 +526,10 @@ class HeadlessTest:
 			# Test 3.2 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Add the first test datasource to the dataset",
-													function_description = "Session.add_datasource",
-											test_function = app.session.add_datasource("test_data/test_data_a.csv", "Test Dataset"),
-											expected_result = "Datasource 'test_data/test_data_a.csv' successfully added to 'Test Dataset'",
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.add_datasource",
+															test_function = app.session.add_datasource("test_data/test_data_a.csv", "Test Dataset"),
+															expected_result = "Datasource 'test_data/test_data_a.csv' successfully added to 'Test Dataset'",
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.2 End ------------------------------------------------------------------------------------
 
@@ -537,17 +537,17 @@ class HeadlessTest:
 			# Test 3.3 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Compile with the single datasource",
-													function_description = "Session.compile_dataset",
-											test_function = app.session.compile_dataset("Test Dataset"),
-											expected_result = {'test_data_a.csv': [
-																									{'key': 'a', 'diff': 'apple', 'value': '1'}, 
-																									{'key': 'a', 'diff': 'banana', 'value': '2'}, 
-																									{'key': 'b', 'diff': 'apple', 'value': '1'}, 
-																									{'key': 'b', 'diff': 'banana', 'value': '2'}, 
-																									{'key': 'c', 'diff': 'apple', 'value': '1'}, 
-																									{'key': 'c', 'diff': 'banana', 'value': '2'}
-																								]},
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.compile_dataset",
+															test_function = app.session.compile_dataset("Test Dataset"),
+															expected_result = {'test_data_a.csv': [
+																																			{'key': 'a', 'diff': 'apple', 'value': '1'}, 
+																																			{'key': 'a', 'diff': 'banana', 'value': '2'}, 
+																																			{'key': 'b', 'diff': 'apple', 'value': '1'}, 
+																																			{'key': 'b', 'diff': 'banana', 'value': '2'}, 
+																																			{'key': 'c', 'diff': 'apple', 'value': '1'}, 
+																																			{'key': 'c', 'diff': 'banana', 'value': '2'}
+																																			]},
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.3 End ------------------------------------------------------------------------------------
 
@@ -555,10 +555,10 @@ class HeadlessTest:
 			# Test 3.4 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Add the second test datasource to the dataset",
-													function_description = "Session.add_datasource",
-											test_function = app.session.add_datasource("test_data/test_data_b.csv", "Test Dataset"),
-											expected_result = "Datasource 'test_data/test_data_b.csv' successfully added to 'Test Dataset'",
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.add_datasource",
+															test_function = app.session.add_datasource("test_data/test_data_b.csv", "Test Dataset"),
+															expected_result = "Datasource 'test_data/test_data_b.csv' successfully added to 'Test Dataset'",
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.4 End ------------------------------------------------------------------------------------
 
@@ -566,23 +566,23 @@ class HeadlessTest:
 			# Test 3.5 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Compile with both datasources",
-													function_description = "Session.compile_dataset",
-											test_function = app.session.compile_dataset("Test Dataset"),
-											expected_result = {'test_data_a.csv + 1 other(s)': [
-																														{'key': 'a', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'a', 'diff': 'banana', 'value': '2'}, 
-																														{'key': 'b', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'b', 'diff': 'banana', 'value': '2'}, 
-																														{'key': 'c', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'c', 'diff': 'banana', 'value': '2'}, 
-																														{'key': 'x', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'x', 'diff': 'banana', 'value': '2'}, 
-																														{'key': 'y', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'y', 'diff': 'banana', 'value': '2'}, 
-																														{'key': 'z', 'diff': 'apple', 'value': '1'}, 
-																														{'key': 'z', 'diff': 'banana', 'value': '2'}
-																													]},
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.compile_dataset",
+															test_function = app.session.compile_dataset("Test Dataset"),
+															expected_result = {'test_data_a.csv + 1 other(s)': [
+																																										{'key': 'a', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'a', 'diff': 'banana', 'value': '2'}, 
+																																										{'key': 'b', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'b', 'diff': 'banana', 'value': '2'}, 
+																																										{'key': 'c', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'c', 'diff': 'banana', 'value': '2'}, 
+																																										{'key': 'x', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'x', 'diff': 'banana', 'value': '2'}, 
+																																										{'key': 'y', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'y', 'diff': 'banana', 'value': '2'}, 
+																																										{'key': 'z', 'diff': 'apple', 'value': '1'}, 
+																																										{'key': 'z', 'diff': 'banana', 'value': '2'}
+																																										]},
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.5 End ------------------------------------------------------------------------------------
 
@@ -590,10 +590,10 @@ class HeadlessTest:
 			# Test 3.6 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Generate a line graph from the test dataset",
-													function_description = "DataDisplay.generate_chart_line",
-											test_function = app.data_display.generate_chart_line(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
-											expected_result = None,
-											print_verbose = (verbosity >= 3)))
+															function_description = "DataDisplay.generate_chart_line",
+															test_function = app.data_display.generate_chart_line(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
+															expected_result = None,
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.6 End ------------------------------------------------------------------------------------
 
@@ -601,10 +601,10 @@ class HeadlessTest:
 			# Test 3.7 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Generate a bar graph from the test dataset",
-													function_description = "DataDisplay.generate_chart_bar",
-											test_function = app.data_display.generate_chart_bar(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
-											expected_result = None,
-											print_verbose = (verbosity >= 3)))
+															function_description = "DataDisplay.generate_chart_bar",
+															test_function = app.data_display.generate_chart_bar(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
+															expected_result = None,
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.7 End ------------------------------------------------------------------------------------
 
@@ -612,10 +612,10 @@ class HeadlessTest:
 			# Test 3.8 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Generate a pie chart from the test dataset",
-													function_description = "DataDisplay.generate_chart_pie",
-											test_function = app.data_display.generate_chart_pie(app.session.compile_dataset("Test Dataset"), "value", "key", "diff", "apple"),
-											expected_result = None,
-											print_verbose = (verbosity >= 3)))
+															function_description = "DataDisplay.generate_chart_pie",
+															test_function = app.data_display.generate_chart_pie(app.session.compile_dataset("Test Dataset"), "value", "key", "diff", "apple"),
+															expected_result = None,
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.8 End ------------------------------------------------------------------------------------
 
@@ -623,10 +623,10 @@ class HeadlessTest:
 			# Test 3.9 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Remove the second datasource from the test dataset",
-													function_description = "Session.remove_datasource",
-											test_function = app.session.remove_datasource("test_data_b.csv", "Test Dataset"),
-											expected_result = "Datasource 'test_data_b.csv' successfully removed from 'Test Dataset'",
-											print_verbose = (verbosity >= 3)))
+															function_description = "Session.remove_datasource",
+															test_function = app.session.remove_datasource("test_data_b.csv", "Test Dataset"),
+															expected_result = "Datasource 'test_data_b.csv' successfully removed from 'Test Dataset'",
+															print_verbose = (verbosity >= 3)))
 
 			# Test 3.9 End ------------------------------------------------------------------------------------
 
@@ -665,7 +665,7 @@ class HeadlessTest:
 			results.append(Test ( test_name = "Fail to compile the old dataset name",
 													function_description = "Session.compile_dataset",
 											test_function = app.session.compile_dataset("Test Dataset"),
-											expected_result = "Invalid tag: 'Test Dataset'",
+											expected_result = "Invalid dataset: 'Test Dataset'",
 											print_verbose = (verbosity >= 3)))
 
 			# Test 3.12 End ------------------------------------------------------------------------------------

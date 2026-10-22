@@ -11,7 +11,7 @@ class FileManager:
 	def compile_dataset(self, dataset):
 		"""Combines all data from the internal database which is linked to the given dataset."""
 		if dataset not in self.datasets:
-			return f"Invalid tag: '{dataset}'"
+			return f"Invalid dataset: '{dataset}'"
 
 		compiled_result = []
 

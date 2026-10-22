@@ -5,6 +5,13 @@
 > - Return graph configuration options
 > - Seperate session creation and joining
 
+> Commit: Adjusting headless testing comparer to more accuartely check
+>
+> - Gave the variables on the bar graph data display function more descriptive names
+> - Changed the headless testing to compare if both the expected and actual result have the exact same number of the exact same values
+> - I am making the headless checker compare the values based on type with a switch since every type needs to be compared slightly differently
+> - Never mind that, I can just sort the two results before comapring them to make sure they will always be the same
+
 > Commit: Session searching and publicity
 >
 > - Added a function to the session manager which takes a search term and returns a list of results containing the search term

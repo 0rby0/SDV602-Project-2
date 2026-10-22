@@ -70,19 +70,19 @@ class DataDisplay:
 				print("No data to plot!")
 				return
 
-			x = []
-			y = {}
+			x_values = []
+			y_values = {}
 
-			for row in next(iter(data.values())):
-				if row[x_key] not in x:
-					x.append(row[x_key])
+			for data_row in next(iter(data.values())):
+				if data_row[x_key] not in x_values:
+					x_values.append(data_row[x_key])
 
-				if row[series_key] in y:
-					y[row[series_key]].append(int(row[y_key]))
+				if data_row[series_key] in y_values:
+					y_values[data_row[series_key]].append(int(data_row[y_key]))
 				else:
-					y[row[series_key]] = [int(row[y_key])]
+					y_values[data_row[series_key]] = [int(data_row[y_key])]
 
-			plt.grouped_bar(y, tick_labels=x)
+			plt.grouped_bar(y_values, tick_labels=x_values)
 			plt.legend()
 			plt.show()
    
