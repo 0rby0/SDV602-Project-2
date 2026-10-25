@@ -1,7 +1,7 @@
 # The entrypoint into the application, parses any CLI arguments, establishes starting values and runs the application.
 from session import Session
 from session_manager import SessionManager
-from data__displayer import DataDisplay
+from data_displayer import DataDisplay
 from user import User
 from headless import HeadlessTest
 import argparse

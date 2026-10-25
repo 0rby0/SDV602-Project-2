@@ -199,11 +199,22 @@ class HeadlessTest:
 			# Test 1.8 End ------------------------------------------------------------------------------------
 
 
+			# Test 4 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Update the data display data",
+			                    				function_description = "DataConfig.update_dataset",
+													test_function = app.data_display.data_conf.update_dataset(app.sm.sessions[0].compile_dataset("Test Dataset")),
+													expected_result = None,
+													print_verbose = (verbosity >= 3)))
+
+			# Test 4 Start ------------------------------------------------------------------------------------
+			
+
 			# Test 1.9 Start ------------------------------------------------------------------------------------
 
-			results.append(Test ( test_name = "Generate a line graph from the test dataset",
-													function_description = "DataDisplay.generate_chart_line",
-											test_function = app.data_display.generate_chart_line(app.sm.sessions[0].compile_dataset("Test Dataset"), "key", "value", "diff"),
+			results.append(Test (test_name = "Generate a line graph from the test dataset",
+											function_description = "DataDisplay.generate_chart_line",
+											test_function = app.data_display.generate_chart_line(),
 											expected_result = None,
 											print_verbose = (verbosity >= 3)))
 
@@ -214,7 +225,7 @@ class HeadlessTest:
 
 			results.append(Test ( test_name = "Generate a bar graph from the test dataset",
 													function_description = "DataDisplay.generate_chart_bar",
-											test_function = app.data_display.generate_chart_bar(app.sm.sessions[0].compile_dataset("Test Dataset"), "key", "value", "diff"),
+											test_function = app.data_display.generate_chart_bar(),
 											expected_result = None,
 											print_verbose = (verbosity >= 3)))
 
@@ -225,7 +236,7 @@ class HeadlessTest:
 
 			results.append(Test ( test_name = "Generate a pie chart from the test dataset",
 													function_description = "DataDisplay.generate_chart_pie",
-											test_function = app.data_display.generate_chart_pie(app.sm.sessions[0].compile_dataset("Test Dataset"), "value", "key", "diff", "apple"),
+											test_function = app.data_display.generate_chart_pie(),
 											expected_result = None,
 											print_verbose = (verbosity >= 3)))
 
@@ -587,11 +598,22 @@ class HeadlessTest:
 			# Test 3.5 End ------------------------------------------------------------------------------------
 
 
+			# Test 4.1 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Update the data display data",
+			                    				function_description = "DataConfig.update_dataset",
+													test_function = app.data_display.data_conf.update_dataset(app.sm.sessions[0].compile_dataset("Test Dataset")),
+													expected_result = None,
+													print_verbose = (verbosity >= 3)))
+
+			# Test 4.1 Start ------------------------------------------------------------------------------------
+
+
 			# Test 3.6 Start ------------------------------------------------------------------------------------
 
 			results.append(Test ( test_name = "Generate a line graph from the test dataset",
 															function_description = "DataDisplay.generate_chart_line",
-															test_function = app.data_display.generate_chart_line(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
+															test_function = app.data_display.generate_chart_line(),
 															expected_result = None,
 															print_verbose = (verbosity >= 3)))
 
@@ -602,7 +624,7 @@ class HeadlessTest:
 
 			results.append(Test ( test_name = "Generate a bar graph from the test dataset",
 															function_description = "DataDisplay.generate_chart_bar",
-															test_function = app.data_display.generate_chart_bar(app.session.compile_dataset("Test Dataset"), "key", "value", "diff"),
+															test_function = app.data_display.generate_chart_bar(),
 															expected_result = None,
 															print_verbose = (verbosity >= 3)))
 
@@ -613,7 +635,7 @@ class HeadlessTest:
 
 			results.append(Test ( test_name = "Generate a pie chart from the test dataset",
 															function_description = "DataDisplay.generate_chart_pie",
-															test_function = app.data_display.generate_chart_pie(app.session.compile_dataset("Test Dataset"), "value", "key", "diff", "apple"),
+															test_function = app.data_display.generate_chart_pie(),
 															expected_result = None,
 															print_verbose = (verbosity >= 3)))
 

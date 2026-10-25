@@ -5,7 +5,12 @@
 > - Return graph configuration options
 > - Seperate session creation and joining
 
-> Commit: Adjusting headless testing comparer to more accuartely check
+> Commit: Allowing for graph configuration options
+>
+> - Created a data configuration class which stores and handles the settings for the data being shown by the data display
+> - The data display now has a data configuration which it uses in place of function values
+
+> Commit: Adjusting headless testing comparer to more accurately check
 >
 > - Gave the variables on the bar graph data display function more descriptive names
 > - Changed the headless testing to compare if both the expected and actual result have the exact same number of the exact same values
