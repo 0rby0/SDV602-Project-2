@@ -1,22 +1,22 @@
 #  Connects to the database and saves/loads data.
 from pymongo import MongoClient
-import config
+import db_config as db_config
 from message import Message
 
 class DatabaseConnection:
 	def __init__(self):
-		self.client = MongoClient(config.MONGO_URI)
+		self.client = MongoClient(db_config.MONGO_URI)
 		self.client.admin.command("ping")
 	
 	
 	def get_collection(self, collection):
 		"""Retrieve a specific collection from the remote database."""
-		return self.client[config.DB_NAME][collection]
+		return self.client[db_config.DB_NAME][collection]
 	
 
 	def get_all_sessions(self):
 		"""Retrieves all session documents from the remote database."""
-		return self.get_collection(config.SESSION_COLLECTION).find()
+		return self.get_collection(db_config.SESSION_COLLECTION).find()
 
 
 	def wipe_data(self, session):
@@ -24,7 +24,7 @@ class DatabaseConnection:
 		if not session:
 			return "Invalid session"
 
-		self.get_collection(config.SESSION_COLLECTION).delete_one({"session": session.session_name})
+		self.get_collection(db_config.SESSION_COLLECTION).delete_one({"session": session.session_name})
 		return "Session wiped successfully"
 	
 	
@@ -43,7 +43,7 @@ class DatabaseConnection:
   
 		formatted_data = { "session": session.session_name, "creator": session.creator, "datasets": session._files.internal_db, "chat":  messages, "public": session.public}
 
-		return self.get_collection(config.SESSION_COLLECTION).find_one_and_replace({"session": session.session_name}, formatted_data, upsert=True)
+		return self.get_collection(db_config.SESSION_COLLECTION).find_one_and_replace({"session": session.session_name}, formatted_data, upsert=True)
 
 
 	def pull_data(self, session):
@@ -51,7 +51,7 @@ class DatabaseConnection:
 		if not session:
 			return "Invalid session"
 
-		pulled_data = self.get_collection(config.SESSION_COLLECTION).find_one({"session": session.session_name})
+		pulled_data = self.get_collection(db_config.SESSION_COLLECTION).find_one({"session": session.session_name})
 
 		if not pulled_data:
 			return "No corelating session in database"

@@ -3,7 +3,12 @@
 > - Tracking active users for each session in the database
 > - Disallowing session deletion if there are still users in the session
 > - Return graph configuration options
-> - Seperate session creation and joining
+
+> Commit: Seperating create and join room functions
+>
+> - Seprated create and join functions
+> - Create function takes a redirect boolean argument which will tell it if it should try to join the room if it already exists
+> - Updated headless test to use correct function
 
 > Commit: Allowing for graph configuration options
 >

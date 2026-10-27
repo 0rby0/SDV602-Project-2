@@ -38,8 +38,26 @@ class SessionManager:
 		return matching_sessions
 
 
-	def join_or_create_session(self, session_name, public = True):
-		"""Creates a new session in the sessions list, if the session exists in the database it will find itself."""
+	def join_session(self, session_name):
+		"""Try to find the given session in the database and join if it exists"""
+		for session in self.db.get_all_sessions():
+			if session["session"] == session_name:
+				self.sessions.append(Session(session_name, self.user.username))
+				return f"Successfully joined session: '{session_name}'"
+ 
+		return "Session not found"
+
+
+	def create_session(self, session_name, public = True, redirect = False):
+		"""Creates a new session in the session list if one does not exist"""
+		
+		# Check that a session doesn't already exist
+		for session in self.db.get_all_sessions():
+			if session["session"] == session_name:
+				if redirect:
+					return self.join_session(session_name)
+				return "Session already exists"
+ 
 		self.sessions.append(Session(session_name, self.user.username, public = public))
 		return f"Successfully joined session: '{session_name}'"
 

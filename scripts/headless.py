@@ -50,8 +50,8 @@ class HeadlessTest:
 			# Test 1.1 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "Joining a test session",
-											function_description = "SessionManager.join_or_create_session",
-											test_function = app.sm.join_or_create_session("Test Session 1"),
+											function_description = "SessionManager.create_session",
+											test_function = app.sm.create_session("Test Session 1", public = True, redirect = True),
 											expected_result = "Successfully joined session: 'Test Session 1'",
 											print_verbose = (verbosity >= 3)))
 
@@ -61,8 +61,8 @@ class HeadlessTest:
 			# Test 1.2 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "Joining another test session",
-									  			function_description = "SessionManager.join_or_create_session",
-											test_function = app.sm.join_or_create_session("Test Session 2"),
+									  			function_description = "SessionManager.create_session",
+											test_function = app.sm.create_session("Test Session 2", public = True, redirect = True),
 											expected_result = "Successfully joined session: 'Test Session 2'",
 											print_verbose = (verbosity >= 3)))
 
@@ -72,8 +72,8 @@ class HeadlessTest:
 			# Test 1.2.1 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "Joining a private session",
-									  			function_description = "SessionManager.join_or_create_session",
-											test_function = app.sm.join_or_create_session("Private session", public = False),
+									  			function_description = "SessionManager.create_session",
+											test_function = app.sm.create_session("Private session", public = False, redirect = True),
 											expected_result = "Successfully joined session: 'Private session'",
 											print_verbose = (verbosity >= 3)))
 
@@ -373,8 +373,8 @@ class HeadlessTest:
 			# Test 1.20 Start ------------------------------------------------------------------------------------
 	
 			results.append(Test ( test_name = "Rejoin the first test session",
-															function_description = "SessionManager.join_or_create_session",
-            											test_function = app.sm.join_or_create_session("Test Session 1"),
+															function_description = "SessionManager.join_session",
+            											test_function = app.sm.join_session("Test Session 1"),
 															expected_result = "Successfully joined session: 'Test Session 1'",
                                              print_verbose = (verbosity >= 3)))
 	
@@ -602,7 +602,7 @@ class HeadlessTest:
 
 			results.append(Test (test_name = "Update the data display data",
 			                    				function_description = "DataConfig.update_dataset",
-													test_function = app.data_display.data_conf.update_dataset(app.sm.sessions[0].compile_dataset("Test Dataset")),
+													test_function = app.data_display.data_conf.update_dataset(app.session.compile_dataset("Test Dataset")),
 													expected_result = None,
 													print_verbose = (verbosity >= 3)))
 
