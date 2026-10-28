@@ -207,8 +207,41 @@ class HeadlessTest:
 													expected_result = None,
 													print_verbose = (verbosity >= 3)))
 
-			# Test 4 Start ------------------------------------------------------------------------------------
+			# Test 4 End ------------------------------------------------------------------------------------
 			
+
+			# Test 4.0.1 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph x axis",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("x", "key"),
+                                    			expected_result = "X key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.0.1 End ------------------------------------------------------------------------------------
+
+
+			# Test 4.0.2 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph y axis",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("y", "value"),
+                                    			expected_result = "Y key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.0.2 End ------------------------------------------------------------------------------------
+
+
+			# Test 4.0.3 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph series key",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("series", "diff"),
+                                    			expected_result = "Series key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.0.3 End ------------------------------------------------------------------------------------
+   
 
 			# Test 1.9 Start ------------------------------------------------------------------------------------
 
@@ -607,6 +640,39 @@ class HeadlessTest:
 													print_verbose = (verbosity >= 3)))
 
 			# Test 4.1 Start ------------------------------------------------------------------------------------
+
+
+			# Test 4.1.1 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph x axis",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("x", "key"),
+                                    			expected_result = "X key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.1.1 End ------------------------------------------------------------------------------------
+
+
+			# Test 4.1.2 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph y axis",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("y", "value"),
+                                    			expected_result = "Y key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.1.2 End ------------------------------------------------------------------------------------
+
+
+			# Test 4.1.3 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Change graph series key",
+                        							function_description = "DataConfig.change_setting",
+                               					test_function = app.data_display.data_conf.change_setting("series", "diff"),
+                                    			expected_result = "Series key updated successfully",
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.1.3 End ------------------------------------------------------------------------------------
 
 
 			# Test 3.6 Start ------------------------------------------------------------------------------------

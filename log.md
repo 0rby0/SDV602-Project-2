@@ -4,6 +4,16 @@
 > - Disallowing session deletion if there are still users in the session
 > - Return graph configuration options
 
+> Commit: Data config changing
+>
+> - The data config class now has a function to change a heading
+> - This works by taking two strings, a heading and a key
+> - The key a string of one of: x, y, series, or get
+> - The heading is a string representing the custom value that this key should be changed to
+> - The function checks that the values are all valid before changing anything
+> - This does allow for the same value to be set for multiple keys, but this actually works with matplotlib since the only requirement is that the y key is a number
+> - Added headless tests to set the test graphs to the correct settings
+
 > Commit: Seperating create and join room functions
 >
 > - Seprated create and join functions
