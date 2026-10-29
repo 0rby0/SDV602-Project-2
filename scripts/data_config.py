@@ -63,7 +63,7 @@ class DataConfig:
 			# If there is a series key, get all its values and assign the first one as the get_series
 			if self.series_key:
 				for row in self.data:
-					if self.series_key in row.keys():
+					if self.series_key in row.keys() and row[self.series_key] not in self.valid_series:
 						self.valid_series.append(row[self.series_key])
 				
 				self.get_series = self.valid_series[0]
@@ -78,7 +78,7 @@ class DataConfig:
 
 				self.x_key = heading
     
-				return "X key updated successfully"
+				return f"X key changed to {self.x_key}"
  
 			case "y":
 				if heading not in self.valid_y_keys:
@@ -86,7 +86,7 @@ class DataConfig:
 
 				self.y_key = heading
     
-				return "Y key updated successfully"
+				return f"Y key changed to {self.y_key}"
   
 			case "series":
 				if heading not in self.headings:
@@ -99,12 +99,12 @@ class DataConfig:
     
 				if self.series_key:
 					for row in self.data:
-						if self.series_key in row.keys():
+						if self.series_key in row.keys() and row[self.series_key] not in self.valid_series:
 							self.valid_series.append(row[self.series_key])
 					
 					self.get_series = self.valid_series[0]
 		
-				return "Series key updated successfully"
+					return f"Series key changed to {self.series_key}"
  
 			case "get":
 				if heading not in self.valid_series:
@@ -112,7 +112,17 @@ class DataConfig:
   
 				self.get_series = heading
     
-				return "Getting series updated successfully"
+				return f"Getting series changed to {self.get_series}"
  
 			case _:
 				return "Invalid key"
+ 
+ 
+	def get_settings(self):
+		"""Returns a collection of each key, its possible values and its current value"""
+		return {
+     					"x": {"options": self.headings, "selected": self.x_key},
+						"y": {"options": self.valid_y_keys, "selected": self.y_key},
+      				"series": {"options": self.headings, "selected": self.series_key},
+          			"get": {"options": self.valid_series, "selected": self.get_series}
+             	}

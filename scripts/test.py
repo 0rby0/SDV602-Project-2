@@ -19,6 +19,8 @@ class Test:
 		# If either part of the result is None, then just do a straight compare
 		if (result == None) | (expected_result == None):
 			valid_result = (result == expected_result)
+		elif (type(result) is dict) | (type(expected_result) is dict):
+			valid_result = self.compare_dicts(result = result, expected = expected_result)
 		else:	
 			valid_result = (sorted(result) == sorted(expected_result))
 
@@ -30,3 +32,21 @@ class Test:
 				output["passed"] = False
 
 		self.output = output
+  
+	def compare_dicts(self, result, expected):
+		# Fail if the results are different sizes
+		if len(result) != len(expected):
+			return False
+     
+		# Go through each key in the actual result
+		for key in result:
+			# If the key from the actual result is not in the expected result
+			if key not in expected:
+				return False
+ 
+			# If the values are the same between the two dictionaries
+			if result[key] != expected[key]:
+				return False
+		
+		# Only pass the check if all other checks didn't fail
+		return True

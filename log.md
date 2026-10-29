@@ -2,7 +2,12 @@
 >
 > - Tracking active users for each session in the database
 > - Disallowing session deletion if there are still users in the session
-> - Return graph configuration options
+
+> Commit: Data config display
+>
+> - The data config class now also has a function which returns a structured collection of data
+> - Added a headless test to check that the correct result is returning
+> - Updated the test module to also include its own dictionary comparer
 
 > Commit: Data config changing
 >

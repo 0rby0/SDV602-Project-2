@@ -215,7 +215,7 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph x axis",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("x", "key"),
-                                    			expected_result = "X key updated successfully",
+                                    			expected_result = "X key changed to key",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.0.1 End ------------------------------------------------------------------------------------
@@ -226,7 +226,7 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph y axis",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("y", "value"),
-                                    			expected_result = "Y key updated successfully",
+                                    			expected_result = "Y key changed to value",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.0.2 End ------------------------------------------------------------------------------------
@@ -237,12 +237,28 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph series key",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("series", "diff"),
-                                    			expected_result = "Series key updated successfully",
+                                    			expected_result = "Series key changed to diff",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.0.3 End ------------------------------------------------------------------------------------
    
 
+			# Test 4.0.4 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Get data config settings",
+                        							function_description = "DataConfig.get_settings",
+                               					test_function = app.data_display.data_conf.get_settings(),
+                                    			expected_result = {
+																										"x": {"options": ["key", "diff", "value"], "selected": "key"},
+																										"y": {"options": ["value"], "selected": "value"},
+																										"series": {"options": ["key", "diff", "value"], "selected": "diff"},
+																										"get": {"options": ["apple", "banana"], "selected": "apple"}
+																									},
+                                       		print_verbose = (verbosity >= 3)))
+
+			# Test 4.0.4 End ------------------------------------------------------------------------------------
+   
+   
 			# Test 1.9 Start ------------------------------------------------------------------------------------
 
 			results.append(Test (test_name = "Generate a line graph from the test dataset",
@@ -647,7 +663,7 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph x axis",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("x", "key"),
-                                    			expected_result = "X key updated successfully",
+                                    			expected_result = "X key changed to key",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.1.1 End ------------------------------------------------------------------------------------
@@ -658,7 +674,7 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph y axis",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("y", "value"),
-                                    			expected_result = "Y key updated successfully",
+                                    			expected_result = "Y key changed to value",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.1.2 End ------------------------------------------------------------------------------------
@@ -669,11 +685,27 @@ class HeadlessTest:
 			results.append(Test (test_name = "Change graph series key",
                         							function_description = "DataConfig.change_setting",
                                					test_function = app.data_display.data_conf.change_setting("series", "diff"),
-                                    			expected_result = "Series key updated successfully",
+                                    			expected_result = "Series key changed to diff",
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.1.3 End ------------------------------------------------------------------------------------
 
+
+			# Test 4.1.4 Start ------------------------------------------------------------------------------------
+
+			results.append(Test (test_name = "Get data config settings",
+															function_description = "DataConfig.get_settings",
+															test_function = app.data_display.data_conf.get_settings(),
+															expected_result = {
+																										"x": {"options": ["key", "diff", "value"], "selected": "key"},
+																										"y": {"options": ["value"], "selected": "value"},
+																										"series": {"options": ["key", "diff", "value"], "selected": "diff"},
+																										"get": {"options": ["apple", "banana"], "selected": "apple"}
+																									},
+															print_verbose = (verbosity >= 3)))
+
+			# Test 4.1.4 End ------------------------------------------------------------------------------------
+   
 
 			# Test 3.6 Start ------------------------------------------------------------------------------------
 
