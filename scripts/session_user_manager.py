@@ -1,0 +1,44 @@
+# Handles the connection between the user and different remote sessions
+from pymongo import MongoClient
+import db_config as db_config
+
+class SessionUserManager:
+	def __init__(self):
+		self.client = MongoClient(db_config.MONGO_URI)
+		self.client.admin.command("ping")
+
+  
+	def get_collection(self, collection):
+		"""Gets the specified collection from the remote database."""
+		return self.client[db_config.DB_NAME][collection]
+	
+ 
+	def find_link(self, username, session_name):
+		"""Finds the account with the given name which us attached to the given session in the remote database."""
+		return self.get_collection(db_config.SESSION_USER_COLLECTION).find_one({"username": username, "session": session_name})
+
+	
+	def find_link_by_username(self, username):
+		"""Finds all links for the given username."""
+		return self.get_collection(db_config.SESSION_USER_COLLECTION).find({"username": username})
+
+
+	def find_link_by_session(self, session_name):
+		"""Finds all links for the given session name."""
+		return self.get_collection(db_config.SESSION_USER_COLLECTION).find({"session": session_name})
+
+
+	def create_link(self, username, session):
+		"""Create a new link between the given user and the given session"""
+		userdata = {"username": username, "session": session}
+		self.get_collection(db_config.SESSION_USER_COLLECTION).insert_one(userdata)
+		return "User linked to session"
+
+
+	def break_link(self, username, session_name):
+		"""Deletes the link between the given user and the given session if applicable"""
+		if not self.find_link(username, session_name):
+			return False
+
+		self.get_collection(db_config.SESSION_USER_COLLECTION).delete_one({"username": username, "session": session_name})
+		return True

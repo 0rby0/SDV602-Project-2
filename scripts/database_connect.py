@@ -16,7 +16,14 @@ class DatabaseConnection:
 
 	def get_all_sessions(self):
 		"""Retrieves all session documents from the remote database."""
-		return self.get_collection(db_config.SESSION_COLLECTION).find()
+		all_sessions = self.get_collection(db_config.SESSION_COLLECTION).find()
+  
+		all_sessions_array = []
+  
+		for session in all_sessions:
+			all_sessions_array.append(session)
+   
+		return all_sessions_array
 
 
 	def wipe_data(self, session):
@@ -24,7 +31,7 @@ class DatabaseConnection:
 		if not session:
 			return "Invalid session"
 
-		self.get_collection(db_config.SESSION_COLLECTION).delete_one({"session": session.session_name})
+		self.get_collection(db_config.SESSION_COLLECTION).delete_one({"session": session["session"]})
 		return "Session wiped successfully"
 	
 	

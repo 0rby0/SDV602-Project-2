@@ -1,15 +1,17 @@
 # Create, Delete, and load sessions
 from database_connect import DatabaseConnection
+from session_user_manager import SessionUserManager
 from session import Session
 
 class SessionManager:
 	def __init__(self, user):
 		self.sessions = []
 		self.user = user
+		self.link = SessionUserManager()
 		self.db = DatabaseConnection()
 
 
-	def get_remote_sessions(self):
+	def get_remote_session_names(self):
 		"""Retrieves and returns the names of all remote sessions being stored in the database."""
 		session_list = []
 		retrieved_sessions = self.db.get_all_sessions()
@@ -28,7 +30,7 @@ class SessionManager:
 		"""Return an array with the names of any remote sessions containing the search string"""
 		matching_sessions = []
   
-		for session in self.get_remote_sessions():
+		for session in self.get_remote_session_names():
 			if search_string in session:
 				matching_sessions.append(session)
 
@@ -42,6 +44,7 @@ class SessionManager:
 		"""Try to find the given session in the database and join if it exists"""
 		for session in self.db.get_all_sessions():
 			if session["session"] == session_name:
+				self.link.create_link(username = self.user.username, session = session_name)
 				self.sessions.append(Session(session_name, self.user.username))
 				return f"Successfully joined session: '{session_name}'"
  
@@ -58,6 +61,8 @@ class SessionManager:
 					return self.join_session(session_name)
 				return "Session already exists"
  
+ 
+		self.link.create_link(username = self.user.username, session = session_name)
 		self.sessions.append(Session(session_name, self.user.username, public = public))
 		return f"Successfully joined session: '{session_name}'"
 
@@ -65,24 +70,21 @@ class SessionManager:
 	def remove_session(self, session_name, user):
 		"""Attempt to remove the requested session from the database as the given user"""
 		if not session_name:
-			return "Invalid session"
+			return "Invalid session name"
 
 		if not user:
 			return "Invalid user"
 
-		for session in self.sessions:
-			if session.session_name == session_name:
+		for session in self.db.get_all_sessions():
+			if session["session"] == session_name:
       
-				if session.session_name not in self.get_remote_sessions():
-					return "Session not in database"
-
-				if session.creator != user.username:
+				if session["creator"] != user.username:
 					return "User is not creator of session"
 
 				self.db.wipe_data(session)
-				return f"Session '{session.session_name}' removed from database"
+				return f"Session '{session["session"]}' removed from database"
  
-		return "Session not open"
+		return "Session not in database"
  
 
 	def leave_session(self, session_name):
@@ -94,7 +96,10 @@ class SessionManager:
 			if session_name == session.session_name:
 				# Delete the current index from the main list if the names match
 				self.sessions.remove(self.sessions[session_index])
-				return "Successfully left session"
+				if self.link.break_link(username = self.user.username, session_name = session_name):
+					return "Successfully left session"
+				else:
+					return "Failed to leave session"
 			else:
 				# Increase the index if the names don't match
 				session_index += 1

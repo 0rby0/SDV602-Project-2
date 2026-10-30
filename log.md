@@ -1,7 +1,16 @@
 > Checklist of things I know are left before front-end implementation:
 >
-> - Tracking active users for each session in the database
 > - Disallowing session deletion if there are still users in the session
+
+> Commit: Tracking user sessions
+>
+> - Created a session user manager class which creates, breaks and finds links between users and sessions
+> - Joining and leaving a session now create and break links
+> - Deleting a user now breaks all links to that user
+> - Modified headless testing to correctly leave all sessions
+> - The session user manager now can find links by either username or session
+> - Unbound session deletion from current sessions
+> - Changed get all session function to actually return an array instead of a cursor
 
 > Commit: Data config display
 >

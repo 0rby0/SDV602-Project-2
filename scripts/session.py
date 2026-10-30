@@ -9,8 +9,6 @@ class Session:
 		self.creator = user
 		self.public = public
   
-		self.users = []
-  
 		self._files = FileManager()
 		
 		self.db = None

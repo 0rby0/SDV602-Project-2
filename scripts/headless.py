@@ -83,8 +83,8 @@ class HeadlessTest:
 			# Test 1.3 Start ------------------------------------------------------------------------------------
 
 			results.append(Test( test_name = "List both active public sessions",
-									  			function_description = "SessionManager.get_remote_sessions",
-											test_function = app.sm.get_remote_sessions(),
+									  			function_description = "SessionManager.get_remote_session_names",
+											test_function = app.sm.get_remote_session_names(),
 											expected_result = ['Test Session 1', 'Test Session 2'],
 											print_verbose = (verbosity >= 3)))
 
@@ -117,8 +117,8 @@ class HeadlessTest:
 
 			results.append(Test( test_name = "Delete private session",
 									  			function_description = "SessionManager.remove_session",
-											test_function = app.sm.remove_session("Private Session", app.user),
-											expected_result = "Session 'Private Session' removed from database",
+											test_function = app.sm.remove_session("Private session", app.user),
+											expected_result = "Session 'Private session' removed from database",
 											print_verbose = (verbosity >= 3)))
 
 			# Test 1.2.2 End ------------------------------------------------------------------------------------
@@ -257,7 +257,7 @@ class HeadlessTest:
                                        		print_verbose = (verbosity >= 3)))
 
 			# Test 4.0.4 End ------------------------------------------------------------------------------------
-   
+
    
 			# Test 1.9 Start ------------------------------------------------------------------------------------
 
@@ -502,6 +502,39 @@ class HeadlessTest:
 				# Test 2.9 Start ------------------------------------------------------------------------------------
     
     
+			# Test 1.21.1 Start ------------------------------------------------------------------------------------
+    
+			results.append(Test ( test_name = "Exit first test session",
+															function_description = "SessionManager.leave_session",
+															test_function = app.sm.leave_session("Test Session 1"),
+															expected_result = "Successfully left session",
+															print_verbose = (verbosity >= 3)))
+    
+    		# Test 1.21.1 End ------------------------------------------------------------------------------------
+        
+    
+			# Test 1.21.2 Start ------------------------------------------------------------------------------------
+    
+			results.append(Test ( test_name = "Exit second test session",
+															function_description = "SessionManager.leave_session",
+															test_function = app.sm.leave_session("Test Session 2"),
+															expected_result = "Successfully left session",
+															print_verbose = (verbosity >= 3)))
+    
+    		# Test 1.21.2 End ------------------------------------------------------------------------------------
+    
+		  
+			# Test 1.21.3 Start ------------------------------------------------------------------------------------
+		
+			results.append(Test ( test_name = "Exit private test session",
+															function_description = "SessionManager.leave_session",
+															test_function = app.sm.leave_session("Private session"),
+															expected_result = "Successfully left session",
+															print_verbose = (verbosity >= 3)))
+		
+			# Test 1.21.3 End ------------------------------------------------------------------------------------
+		
+    
 			# Test 1.22 Start ------------------------------------------------------------------------------------
 		
 			results.append(Test ( test_name = "Delete the first test session",
@@ -511,6 +544,17 @@ class HeadlessTest:
 															print_verbose = (verbosity >= 3)))
 	
 			# Test 1.22 Start ------------------------------------------------------------------------------------
+   		
+    
+			# Test 1.22.1 Start ------------------------------------------------------------------------------------
+		
+			results.append(Test ( test_name = "Delete the second test session",
+															function_description = "SessionManager.remove_session",
+															test_function = app.sm.remove_session("Test Session 2", app.user),
+															expected_result = "Session 'Test Session 2' removed from database",
+															print_verbose = (verbosity >= 3)))
+	
+			# Test 1.22.1 Start ------------------------------------------------------------------------------------
    
    
 			# Test 1.23 Start ------------------------------------------------------------------------------------
